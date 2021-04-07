@@ -103,7 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Commands\" />
-    <Folder Include="ViewModels\" />
+    <Folder Include="ViewModels\Base\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
