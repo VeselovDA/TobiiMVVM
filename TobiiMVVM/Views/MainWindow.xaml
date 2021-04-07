@@ -1,12 +1,33 @@
-﻿<Window x:Class="TobiiMVVM.MainWindow"
+﻿<Window x:Class="TobiiMVVM.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TobiiMVVM.Views"
         mc:Ignorable="d"
-        Title="Манипулятор" Height="450" Width="800">
-    <Grid>
+        Title="Манипулятор" Height="450" Width="800" >
+    <DockPanel Background="#FF5B6060">
+        <!--Меню -->
+        <Grid DockPanel.Dock="Top">
+            <Menu DockPanel.Dock="Top"  Background="#00FFFFFF" Margin="0,0,0,10" Foreground="AliceBlue">
+                <MenuItem x:Name="MenuCalibration" Header="Калибровка"  Command="{Binding Сalibration}" />
+                <MenuItem x:Name="MenuSetting" Header="Настройки" Command="{Binding OpenSetting}"  />
+
+
+                <MenuItem x:Name="MenuHelp" Header="Помощь"  >
+                    <MenuItem  x:Name="MenuHelpINST" Header="Инструкция " Foreground="Black"  Command="{Binding OpenManual}"/>
+                    <MenuItem  x:Name="MenuHelpAUTHOR" Header="Об авторах" Command="{Binding AboutAuthors}" Foreground="Black"/>
+                </MenuItem>
+            </Menu>
+
+        </Grid>
+        <!--Подвал -->
         
-    </Grid>
+            <ProgressBar DockPanel.Dock="Bottom" Value="69" Height="20" ></ProgressBar>
+        
+        <!--Основная часть -->
+        <Grid>
+            
+        </Grid>
+    </DockPanel>
 </Window>
