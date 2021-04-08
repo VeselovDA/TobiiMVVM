@@ -3,10 +3,131 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:TobiiMVVM.Views"
         mc:Ignorable="d"
-        Title="SettingWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Настройки" Height="588.884" Width="800"
+        Background="#FF5B6060">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="AliceBlue"/>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="Button">
+            <Setter Property="Foreground" Value="AliceBlue"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderThickness="0" BorderBrush="Black" Background="{TemplateBinding Background}" CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#00FFFFFF"/>
+                                <Setter TargetName="border" Property="BorderThickness" Value="3"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Visibility="{Binding VisibilitySettingGrid}" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Margin="0,0,5,0" Foreground="AliceBlue" >
+            <GroupBox.Header >
+                <Span FontWeight="Bold">Выбор камер</Span>
+
+            </GroupBox.Header>
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal"  Margin="10">
+                    <TextBlock><Run Text="Камера 1"/></TextBlock>
+                    <ComboBox Width="200"  Margin="10,0,0,0" ItemsSource="{Binding WebCams}" SelectedIndex="{Binding SelectIndexCam1}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged" >
+                                <i:InvokeCommandAction Command="{Binding SelectCamera1}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBlock><Run Text="Камера 2"/></TextBlock>
+                    <ComboBox Width="200" Margin="10,0,0,0" ItemsSource="{Binding WebCams}" SelectedIndex="{Binding SelectIndexCam2}">
+
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged" >
+                                <i:InvokeCommandAction Command="{Binding SelectCamera2}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                </StackPanel>
+                <Image Margin="10" Width="200" Height="200" HorizontalAlignment="Left" Source="{Binding Camera1}"/>
+                <Image  Margin="10" Width="200" Height="200" HorizontalAlignment="Left" Source="{Binding Camera2}"/>
+
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Grid.Column="1" Margin="5,0,0,0"   Foreground="AliceBlue">
+            <GroupBox.Header >
+                <Span FontWeight="Bold">Настройки порта</Span>
+
+            </GroupBox.Header>
+            <StackPanel Orientation="Vertical" Grid.Column="1">
+                <StackPanel Orientation="Horizontal"  Margin="10,10,0,10">
+                    <TextBlock><Run Text="Выбор порта"/></TextBlock>
+                    <ComboBox Width="200"  Margin="20,0,0,0" Text="{Binding SelectItemComNum}" ItemsSource="{Binding ComPorts}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10,20,0,10">
+                    <TextBlock><Run Text="Скорость"/></TextBlock>
+                    <ComboBox Width="200" Margin="41,0,0,0" Text="{Binding SelectItemComSpeed}">
+                        <ComboBoxItem Content="110"/>
+                        <ComboBoxItem Content="300"/>
+                        <ComboBoxItem Content="600"/>
+                        <ComboBoxItem Content="1200"/>
+                        <ComboBoxItem Content="2400"/>
+                        <ComboBoxItem Content="4800"/>
+                        <ComboBoxItem Content="9600"/>
+                        <ComboBoxItem Content="19200"/>
+                        <ComboBoxItem Content="38400"/>
+                        <ComboBoxItem Content="57600"/>
+                        <ComboBoxItem Content="115200"/>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  Margin="10,20,0,10">
+                    <TextBlock><Run Text="Биты данных"/></TextBlock>
+                    <ComboBox Width="200" Margin="22,0,0,0" Text="{Binding SelectItemComBit}">
+                        <ComboBoxItem Content="5"/>
+                        <ComboBoxItem Content="6"/>
+                        <ComboBoxItem Content="7"/>
+                        <ComboBoxItem Content="8"/>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  Margin="10,20,0,10">
+                    <TextBlock><Run Text="Контроль"/></TextBlock>
+                    <ComboBox Width="200"  Margin="41,0,0,0" Text="{Binding SelectItemComErrors}">
+                        <ComboBoxItem Content="None"/>
+                        <ComboBoxItem Content="Odd"/>
+                        <ComboBoxItem Content="Even"/>
+                        <ComboBoxItem Content="Mark"/>
+                        <ComboBoxItem Content="Space"/>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  Margin="10,20,0,10">
+                    <TextBlock><Run Text="Стоп-бит"/></TextBlock>
+                    <ComboBox    Width="200" Margin="41,0,0,0" Text="{Binding SelectItemComStopBit}" >
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="1.5"/>
+                        <ComboBoxItem Content="2"/>
+
+                    </ComboBox>
+                </StackPanel>
+                <TextBlock Margin="10,20,0,10 " FontSize="18" ><Run Text="При нажатии кнопки 'Сохранить'"/><LineBreak/><Run Text="в памяти вашего компьютера будет"/><LineBreak/><Run Text="создан файл для хранения настроек системы"/></TextBlock>
+                <Button Style="{DynamicResource Button}" Command="{Binding AcceptSetting}" Grid.Column="1" Width="200" Height="50" Background="#444444" HorizontalAlignment="Left" Content="Сохранить" Margin="10,20,0,0"/>
+                <Button Style="{DynamicResource Button}" Command="{Binding CloseWindow}"   Width="200" Height="50"  Background="#444444" HorizontalAlignment="Left" Content="Закрыть"  Margin="10,20,0,0"/>
+
+            </StackPanel>
+        </GroupBox>
     </Grid>
 </Window>
