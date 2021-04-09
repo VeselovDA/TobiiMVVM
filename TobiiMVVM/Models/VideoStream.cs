@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using System.Windows;
 
 namespace TobiiMVVM.Models
 {
@@ -20,9 +21,14 @@ namespace TobiiMVVM.Models
         public  VideoStream  (Action<BitmapImage> toSetterCamera,int deviseCameraNum)
         {
             this.toSetterCamera = toSetterCamera;
-            videoCapture = new VideoCapture(deviseCameraNum);
-            videoCapture.ImageGrabbed += VideoCapture_ImageGrabbed;
-            videoCapture.Start();
+            if (deviseCameraNum != -1)
+            {
+                videoCapture = new VideoCapture(deviseCameraNum);
+                videoCapture.ImageGrabbed += VideoCapture_ImageGrabbed;
+                videoCapture.Start();
+            }
+            else
+                MessageBox.Show("Камера не выбрана ");
 
 
 
@@ -62,8 +68,11 @@ namespace TobiiMVVM.Models
 
         public void Dispose()
         {
-            videoCapture.Stop();
-            videoCapture.Dispose();
+            if (videoCapture != null)
+            {
+                videoCapture.Stop();
+                videoCapture.Dispose();
+            }
         }
     }
 }
