@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -43,13 +45,27 @@ namespace TobiiMVVM.ViewModels
         private void OnLoadExecuted(object p)
         {
             Notify += MainWindowVM_Notify;
-            var task=Task.Run(() =>
-            {
-                 videoStream1 = new VideoStream(setCamera1,1);
-                 videoStream2 = new VideoStream(setCamera2,2);
-                Notify("Загрузка завершена");
+            try {
+                string jsonString = File.ReadAllText("settingFile.json");
+                StorageClassSetting storage = new StorageClassSetting();
+                storage = JsonSerializer.Deserialize<StorageClassSetting>(jsonString);
+                var task = Task.Run(() =>
+                {
+                    videoStream1 = new VideoStream(setCamera1, Convert.ToInt32(storage.camera1));
+                    videoStream2 = new VideoStream(setCamera2, Convert.ToInt32(storage.camera2));
+                    Notify("Загрузка завершена");
 
-    });
+                }
+                );
+
+
+            }
+            catch
+            {
+                OnOpenSettingExecuted(p);
+            }
+            
+           
             
             
         }
