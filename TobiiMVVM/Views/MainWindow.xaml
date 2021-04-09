@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:TobiiMVVM.Views"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
         mc:Ignorable="d"
-        Title="Манипулятор" Height="450" Width="800" >
+        Title="Манипулятор" Height="450" Width="800" 
+        IsEnabled="{Binding Path=IsEnabled}"
+        >
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded" >
             <i:InvokeCommandAction Command="{Binding Load}" />

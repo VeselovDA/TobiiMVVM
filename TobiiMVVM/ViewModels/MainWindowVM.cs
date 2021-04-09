@@ -18,20 +18,23 @@ namespace TobiiMVVM.ViewModels
     class MainWindowVM : BaseVM
     {
         #region fields
-        private BitmapImage _Camera1;
-        private BitmapImage _Camera2;
-        private string checkCameras="Загрузка камер";
+        BitmapImage _Camera1;
+        BitmapImage _Camera2;
+        string checkCameras="Загрузка камер";
         VideoStream videoStream1;
         VideoStream videoStream2;
         delegate void DowloadStartSetting(string message);
         event DowloadStartSetting Notify;
         SettingWindowVM settingWindowVM;
+        bool _isEnabled=true;
+
 
         #endregion
         public ICommand OpenSetting { get; }
         private bool CanOpenSettingExecute(object p) => true;
         private  void OnOpenSettingExecuted(object p)
         {
+            IsEnabled = false;
             if(videoStream1!=null)
                 videoStream1.Dispose();
             if (videoStream2 != null)
@@ -77,6 +80,11 @@ namespace TobiiMVVM.ViewModels
             CheckCameras = message;
         }
         #region Field for Binding
+        public bool IsEnabled
+        {
+            get => _isEnabled;
+            set => Set(ref _isEnabled, value);
+        }
         public string CheckCameras
         {
             get => checkCameras;
@@ -105,6 +113,7 @@ namespace TobiiMVVM.ViewModels
         #endregion
         public void restart()
         {
+            IsEnabled = true;
             var displayRootRegistry = (Application.Current as App).displayRootRegistry;
             displayRootRegistry.HidePresentation(settingWindowVM);
         }
