@@ -23,22 +23,24 @@ namespace TobiiMVVM.ViewModels
         private string checkCameras="Загрузка камер";
         VideoStream videoStream1;
         VideoStream videoStream2;
-        delegate void AccountHandler(string message);
-        event AccountHandler Notify;
-       
+        delegate void DowloadStartSetting(string message);
+        event DowloadStartSetting Notify;
+        SettingWindowVM settingWindowVM;
+
         #endregion
         public ICommand OpenSetting { get; }
         private bool CanOpenSettingExecute(object p) => true;
-        private async void OnOpenSettingExecuted(object p)
+        private  void OnOpenSettingExecuted(object p)
         {
             if(videoStream1!=null)
                 videoStream1.Dispose();
             if (videoStream2 != null)
                  videoStream2.Dispose();
             var displayRootRegistry = (Application.Current as App).displayRootRegistry;
-            var newWindow = new SettingWindowVM();
-            //displayRootRegistry.ShowPresentation(newWindow);
-            await displayRootRegistry.ShowModalPresentation(newWindow);
+            settingWindowVM = new SettingWindowVM(this);
+            displayRootRegistry.ShowPresentation(settingWindowVM);
+           // await displayRootRegistry.ShowModalPresentation(settingWindowVM);
+            
         }
         public ICommand Load { get; }
         private bool CanLoadExecute(object p) => true;
@@ -101,7 +103,11 @@ namespace TobiiMVVM.ViewModels
             Camera2 = im;
         }
         #endregion
-
+        public void restart()
+        {
+            var displayRootRegistry = (Application.Current as App).displayRootRegistry;
+            displayRootRegistry.HidePresentation(settingWindowVM);
+        }
         public MainWindowVM()
         {
             Load = new LambdaCommand(OnLoadExecuted, CanLoadExecute);

@@ -7,7 +7,8 @@
         xmlns:local="clr-namespace:TobiiMVVM.Views"
         mc:Ignorable="d"
         Title="Настройки" Height="665.132" Width="1352.438"
-        Background="#FF5B6060">
+        Background="#FF5B6060"
+        >
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="AliceBlue"/>
@@ -31,9 +32,13 @@
             </Setter>
         </Style>
     </Window.Resources>
+
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded" >
             <i:InvokeCommandAction Command="{Binding Load}" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Closed" >
+            <i:InvokeCommandAction Command="{Binding Close}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid Visibility="{Binding VisibilitySettingGrid}" >
@@ -132,7 +137,7 @@
                 </StackPanel>
                 <TextBlock Margin="10,20,0,10 " FontSize="18" ><Run Text="При нажатии кнопки 'Сохранить'"/><LineBreak/><Run Text="в памяти вашего компьютера будет"/><LineBreak/><Run Text="создан файл для хранения настроек системы"/></TextBlock>
                 <Button Style="{DynamicResource Button}" Command="{Binding AcceptSetting}" Grid.Column="1" Width="200" Height="50" Background="#444444" HorizontalAlignment="Left" Content="Сохранить" Margin="10,20,0,0"/>
-                <Button Style="{DynamicResource Button}" Command="{Binding CloseWindow}"   Width="200" Height="50"  Background="#444444" HorizontalAlignment="Left" Content="Закрыть"  Margin="10,20,0,0"/>
+                <Button Style="{DynamicResource Button}" Command="{Binding Close}"   Width="200" Height="50"  Background="#444444" HorizontalAlignment="Left" Content="Закрыть"  Margin="10,20,0,0"/>
 
             </StackPanel>
         </GroupBox>
