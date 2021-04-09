@@ -23,5 +23,10 @@ namespace TobiiMVVM.Views
         {
             InitializeComponent();
         }
+
+        private void Button_HasGazeChanged(object sender, Tobii.Interaction.Wpf.HasGazeChangedRoutedEventArgs e)
+        {
+            MessageBox.Show("э");
+        }
     }
 }

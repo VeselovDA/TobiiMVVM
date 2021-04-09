@@ -116,6 +116,8 @@ namespace TobiiMVVM.ViewModels
             IsEnabled = true;
             var displayRootRegistry = (Application.Current as App).displayRootRegistry;
             displayRootRegistry.HidePresentation(settingWindowVM);
+            OnLoadExecuted(null);
+
         }
         public MainWindowVM()
         {
