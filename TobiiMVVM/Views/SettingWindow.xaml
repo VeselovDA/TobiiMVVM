@@ -6,7 +6,7 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:TobiiMVVM.Views"
         mc:Ignorable="d"
-        Title="Настройки" Height="588.884" Width="800"
+        Title="Настройки" Height="665.132" Width="1352.438"
         Background="#FF5B6060">
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}">
@@ -31,6 +31,11 @@
             </Setter>
         </Style>
     </Window.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded" >
+            <i:InvokeCommandAction Command="{Binding Load}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid Visibility="{Binding VisibilitySettingGrid}" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -63,7 +68,9 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </ComboBox>
+                    
                 </StackPanel>
+                <Button Style="{DynamicResource Button}" Command="{Binding CheckCameras}" Grid.Column="1" Width="200" Height="50" Background="#444444" HorizontalAlignment="Left" Content="Проверить камеры" Margin="10,20,0,0"/>
                 <Image Margin="10" Width="200" Height="200" HorizontalAlignment="Left" Source="{Binding Camera1}"/>
                 <Image  Margin="10" Width="200" Height="200" HorizontalAlignment="Left" Source="{Binding Camera2}"/>
 
