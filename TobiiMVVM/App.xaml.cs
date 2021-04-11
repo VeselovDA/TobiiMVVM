@@ -53,7 +53,7 @@ namespace TobiiMVVM
             }
             catch (InvalidOperationException)
             {
-                MessageBox.Show("Process " + target_name + " not found!");
+               // MessageBox.Show("Process " + target_name + " not found!");
 
             }
             _host.Dispose();
