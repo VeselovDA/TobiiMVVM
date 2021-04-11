@@ -138,8 +138,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DisplayRootRegistry.cs" />
+    <Compile Include="Models\AbstractConnection.cs" />
+    <Compile Include="Models\ComConnection.cs" />
     <Compile Include="Models\Commands\Command.cs" />
     <Compile Include="Models\LambdaCommand.cs" />
+    <Compile Include="Models\ManipMove.cs" />
     <Compile Include="Models\RoutedEventTrigger.cs" />
     <Compile Include="Models\StorageClassSetting.cs" />
     <Compile Include="Models\VideoStream.cs" />
@@ -192,6 +195,13 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Images\arrows.png" />
+    <Resource Include="Views\Images\letGo.png" />
+    <Resource Include="Views\Images\reset.png" />
+    <Resource Include="Views\Images\take.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\EMGU.CV.4.1.1.3497\build\EMGU.CV.targets" Condition="Exists('..\packages\EMGU.CV.4.1.1.3497\build\EMGU.CV.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
